@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вік перевірка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Вік перевірка</h1>
+        <form id="ageForm">
+            <label for="ageInput">Скільки вам років?</label><br>
+            <input type="number" id="ageInput" name="age" required><br><br>
+            <button type="submit">Перевірити</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('ageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let age = document.getElementById('ageInput').value;
+            let message = document.getElementById('message');
+
+            if (age >= 18 && age <= 100) {
+                message.textContent = 'Ласкаво просимо до сайту!';
+                message.style.color = 'green';
+            } else {
+                message.textContent = 'Доступ заборонено!';
+                message.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

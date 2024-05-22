@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+        <form id="initialForm">
+            <label for="initialInput">Enter number 1-50:</label><br>
+            <input type="number" id="initialInput" name="initial" required><br><br>
+            <button type="submit">Start</button>
+        </form>
+        <form id="guessForm" style="display:none;">
+            <label for="guessInput">Enter number:</label><br>
+            <input type="number" id="guessInput" name="guess" required><br><br>
+            <button type="submit">Guess</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let answer;
+        document.getElementById('initialForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            answer = document.getElementById('initialInput').value;
+            document.getElementById('initialForm').style.display = 'none';
+            document.getElementById('guessForm').style.display = 'block';
+            document.getElementById('message').textContent = 'Now guess the number!';
+        });
+
+        document.getElementById('guessForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let guess = document.getElementById('guessInput').value;
+            let message = document.getElementById('message');
+
+            if (guess < answer) {
+                message.textContent = 'Bigger!';
+                message.style.color = 'orange';
+            } else if (guess > answer) {
+                message.textContent = 'Smaller!';
+                message.style.color = 'orange';
+            } else {
+                message.textContent = 'WIN!';
+                message.style.color = 'green';
+            }
+        });
+    </script>
+</body>
+</html>

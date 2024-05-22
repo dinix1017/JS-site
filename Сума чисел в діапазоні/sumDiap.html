@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Числа в діапазоні</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #numbers {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #sum {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Числа в діапазоні</h1>
+        <form id="rangeForm">
+            <label for="startInput">Введіть початок діапазону (число):</label><br>
+            <input type="number" id="startInput" name="start" required><br><br>
+            <label for="endInput">Введіть кінець діапазону (число):</label><br>
+            <input type="number" id="endInput" name="end" required><br><br>
+            <button type="submit">Вивести</button>
+        </form>
+        <p id="numbers"></p>
+        <p id="sum"></p>
+    </div>
+
+    <script>
+        document.getElementById('rangeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let start = parseInt(document.getElementById('startInput').value);
+            let end = parseInt(document.getElementById('endInput').value);
+            let numbersElement = document.getElementById('numbers');
+            let sumElement = document.getElementById('sum');
+
+            if (isNaN(start) || isNaN(end)) {
+                numbersElement.textContent = "Будь ласка, введіть коректні числові значення.";
+                sumElement.textContent = "";
+                return;
+            }
+
+            let numbersInRange = [];
+            let sum = 0;
+            for (let i = start; i <= end; i++) {
+                numbersInRange.push(i);
+                sum += i;
+            }
+            numbersElement.textContent = `Числа в діапазоні від ${start} до ${end}: ${numbersInRange.join(', ')}`;
+            sumElement.textContent = `Сума чисел в діапазоні від ${start} до ${end} дорівнює ${sum}`;
+        });
+    </script>
+</body>
+</html>

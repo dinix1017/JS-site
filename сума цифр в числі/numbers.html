@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Обробка цілого числа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #007BFF;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="number"] {
+            margin-bottom: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Обробка цілого числа</h2>
+    <label for="numberInput">Введіть ціле число:</label>
+    <input type="number" id="numberInput" />
+    <button onclick="processNumber()">Обробити</button>
+
+    <div id="results">
+    </div>
+
+    <script>
+        function processNumber() {
+            const numberInput = document.getElementById("numberInput");
+            const number = numberInput.value;
+            const resultsDiv = document.getElementById("results");
+
+            resultsDiv.innerHTML = "";
+
+            if (!number) {
+                resultsDiv.innerHTML = "Будь ласка, введіть ціле число.";
+                return;
+            }
+
+            const digits = number.split(""); 
+            const numDigits = digits.length; 
+            let sumOfDigits = 0; 
+            let evenCount = 0; 
+            let oddCount = 0; 
+
+            resultsDiv.innerHTML += `<p>Кількість цифр у числі: ${numDigits} (${numDigits === 1 ? "цифра" : numDigits >= 2 && numDigits <= 4 ? "цифри" : "цифр"})</p>`;
+
+            resultsDiv.innerHTML += `<p>Цифри числа: ${digits.join(" ")}</p>`;
+
+            for (const digit of digits) {
+                const digitValue = parseInt(digit);
+                sumOfDigits += digitValue;
+                if (digitValue % 2 === 0) {
+                    evenCount++;
+                } else {
+                    oddCount++;
+                }
+            }
+
+            resultsDiv.innerHTML += `<p>Сума цифр у числі: ${sumOfDigits}</p>`;
+            resultsDiv.innerHTML += `<p>Кількість парних цифр: ${evenCount}</p>`;
+            resultsDiv.innerHTML += `<p>Кількість непарних цифр: ${oddCount}</p>`;
+        }
+    </script>
+</body>
+</html>

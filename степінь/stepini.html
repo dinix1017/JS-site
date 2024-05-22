@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обчислення степеня</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Обчислення степеня</h1>
+        <form id="powerForm">
+            <label for="baseInput">Введіть основу (число):</label><br>
+            <input type="number" id="baseInput" name="base" required><br><br>
+            <label for="exponentInput">Введіть показник степеня (число):</label><br>
+            <input type="number" id="exponentInput" name="exponent" required><br><br>
+            <button type="submit">Обчислити</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById('powerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let base = parseFloat(document.getElementById('baseInput').value);
+            let exponent = parseFloat(document.getElementById('exponentInput').value);
+            let resultElement = document.getElementById('result');
+
+            if (isNaN(base) || isNaN(exponent)) {
+                resultElement.textContent = "Будь ласка, введіть коректні числові значення.";
+                resultElement.style.color = 'red';
+            } else {
+                let result = Math.pow(base, exponent);
+                resultElement.textContent = `Результат: ${base} в степені ${exponent} дорівнює ${result}`;
+                resultElement.style.color = 'green';
+            }
+        });
+    </script>
+</body>
+</html>

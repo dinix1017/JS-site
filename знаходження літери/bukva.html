@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Позиція букви в алфавіті</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Позиція букви в алфавіті</h1>
+        <form id="letterForm">
+            <label for="letterInput">Введіть одну букву алфавіту:</label><br>
+            <input type="text" id="letterInput" name="letter" required maxlength="1"><br><br>
+            <button type="submit">Перевірити</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('letterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let input = document.getElementById('letterInput').value.trim().toLowerCase();
+            let message = document.getElementById('message');
+
+            if (input.length !== 1 || !/^[a-zа-яёїієґ]$/i.test(input)) {
+                message.textContent = "Будь ласка, введіть одну букву.";
+                message.style.color = 'red';
+            } else {
+                const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+                const alphabetUkr = 'абвгґдеєжзийіїклмнопрстуфхцчшщьюя';
+                let position;
+
+                if (alphabet.includes(input)) {
+                    position = alphabet.indexOf(input) + 1;
+                } else if (alphabetUkr.includes(input)) {
+                    position = alphabetUkr.indexOf(input) + 1;
+                }
+
+                if (position) {
+                    message.textContent = `Буква '${input}' знаходиться на позиції ${position} в алфавіті.`;
+                    message.style.color = 'green';
+                } else {
+                    message.textContent = "Буква не знайдена в алфавіті.";
+                    message.style.color = 'red';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

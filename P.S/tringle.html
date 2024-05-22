@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Площа Трикутника та Прямокутника</title>
+    <style>
+        label, input, button {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Вирахування площі та периметру</h1>
+    
+    <h2>Трикутник</h2>
+    <label>Сторона A: <input type="number" id="sideA"></label>
+    <label>Сторона B: <input type="number" id="sideB"></label>
+    <label>Сторона C: <input type="number" id="sideC"></label>
+    <button onclick="calculateTriangle()">Вирахувати</button>
+    <p id="triangleResult"></p>
+    
+    <h2>Прямокутник</h2>
+    <label>Довжина: <input type="number" id="length"></label>
+    <label>Ширина: <input type="number" id="width"></label>
+    <button onclick="calculateRectangle()">Вирахувати</button>
+    <p id="rectangleResult"></p>
+
+    <script>
+        function calculateTriangle() {
+            const sideA = parseFloat(document.getElementById('sideA').value);
+            const sideB = parseFloat(document.getElementById('sideB').value);
+            const sideC = parseFloat(document.getElementById('sideC').value);
+
+            if (isNaN(sideA) || isNaN(sideB) || isNaN(sideC)) {
+                document.getElementById('triangleResult').textContent = 'Будь ласка, введіть числові значення.';
+                return;
+            }
+
+            const perimeter = sideA + sideB + sideC;
+            const semiPerimeter = perimeter / 2;
+            const area = Math.sqrt(semiPerimeter * (semiPerimeter - sideA) * (semiPerimeter - sideB) * (semiPerimeter - sideC));
+
+            document.getElementById('triangleResult').textContent = `Периметр: ${perimeter}, Площа: ${area.toFixed(2)}`;
+        }
+
+        function calculateRectangle() {
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+
+            if (isNaN(length) || isNaN(width)) {
+                document.getElementById('rectangleResult').textContent = 'Будь ласка, введіть числові значення.';
+                return;
+            }
+
+            const perimeter = 2 * (length + width);
+            const area = length * width;
+
+            document.getElementById('rectangleResult').textContent = `Периметр: ${perimeter}, Площа: ${area.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

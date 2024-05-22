@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рівень знань</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Рівень знань</h1>
+        <form id="gradeForm">
+            <label for="gradeInput">Введіть вашу оцінку від 1 до 12:</label><br>
+            <input type="number" id="gradeInput" name="grade" min="1" max="12" required><br><br>
+            <button type="submit">Перевірити</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('gradeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let grade = parseInt(document.getElementById('gradeInput').value);
+            let message = document.getElementById('message');
+
+            if (isNaN(grade) || grade < 1 || grade > 12) {
+                message.textContent = "Будь ласка, введіть коректну оцінку від 1 до 12.";
+                message.style.color = 'red';
+            } else {
+                let level;
+                if (grade >= 1 && grade <= 4) {
+                    level = "низький";
+                } else if (grade >= 5 && grade <= 8) {
+                    level = "середній";
+                } else if (grade >= 9 && grade <= 12) {
+                    level = "високий";
+                }
+                message.textContent = `Ваш рівень знань: ${level}`;
+                message.style.color = 'green';
+            }
+        });
+    </script>
+</body>
+</html>

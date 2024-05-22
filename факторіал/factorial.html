@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обчислення факторіалу</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Обчислення факторіалу</h1>
+        <form id="factorialForm">
+            <label for="numberInput">Введіть число для обчислення факторіалу:</label><br>
+            <input type="number" id="numberInput" name="number" required min="0"><br><br>
+            <button type="submit">Обчислити</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById('factorialForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let number = parseInt(document.getElementById('numberInput').value);
+            let resultElement = document.getElementById('result');
+
+            if (isNaN(number) || number < 0) {
+                resultElement.textContent = "Будь ласка, введіть коректне невід'ємне число.";
+                resultElement.style.color = 'red';
+            } else {
+                function factorial(n) {
+                    if (n === 0 || n === 1) {
+                        return 1;
+                    }
+                    return n * factorial(n - 1);
+                }
+                let result = factorial(number);
+                resultElement.textContent = `Факторіал числа ${number} дорівнює ${result}`;
+                resultElement.style.color = 'green';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зняття грошей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Зняття грошей</h1>
+        <form id="moneyForm">
+            <label for="moneyInput">Яку суму хочете зняти?</label><br>
+            <input type="number" id="moneyInput" name="money" required><br><br>
+            <button type="submit">Зняти</button>
+            <button type="button" id="cancelButton">Відмінити</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('moneyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let money = document.getElementById('moneyInput').value;
+            let message = document.getElementById('message');
+
+            if (money < 50 || money > 3000) {
+                message.textContent = 'На жаль, Ви можете зняти гроші на суму від 50 грн. до 3000 грн.';
+                message.style.color = 'red';
+            } else if (money % 50 != 0) {
+                message.textContent = 'В банкоматі немає таких купюр!';
+                message.style.color = 'red';
+            } else {
+                message.textContent = `Заберіть ваші гроші: ${money} грн.`;
+                message.style.color = 'green';
+            }
+        });
+
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            let message = document.getElementById('message');
+            message.textContent = 'Ви відмінили операцію зняття грошей.';
+            message.style.color = 'blue';
+        });
+    </script>
+</body>
+</html>
